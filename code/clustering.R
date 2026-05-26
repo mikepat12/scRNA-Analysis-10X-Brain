@@ -88,4 +88,35 @@ DoHeatmap(subser, top$gene) +
   theme(legend.position='none')
 dev.off()
 
+# Marker gene plots
+marker_genes <- list(
+  'Immune'=c('Ptprc'),
+  'T Cells'=c('Cd3e', 'Cd4','Cd8a'),
+  'NK'=c('Nkg7'),
+  'B Cells'=c('Cd19', 'Ms4a1'),
+  'Myeloid'=c('Cd14','Cd68','Itgam','Itgax','Csf3r'),
+  'Endothelial'=c('Pecam1', 'Vwf', 'Lyve1'),
+  'Epithelial'=c('Epcam','Cd24a'),
+  'Pericyte'=c('Rgs5','Pdgfrb','Notch3'),
+  'Fibroblasts'=c('Col1a1', 'Dcn'),
+  'Neural'=c('Il17ra', 'Ikzf1', 'Calb1', 'Colq', 'Th', 'Avpr1a', 'Oprk1', 'Bmpr1b', 'Vcan', 'MrgA3', 'Asic3', 
+    'Pvalb', 'Sst', 'Trpm8', 'Mrgprd', 'Mrgpra3', 'Ntrk1', 'Ntrk2', 'Ntrk3', 'Nefh', 
+    'Calca', 'P2rx3', 'Cysltr2', 'Smr2')
+)
+if(!dir.exists('2 Clustering/marker_genes')) dir.create('2 Clustering/marker_genes')
+
+for(i in 1:length(marker_genes)){
+  # Grab name of list and get only genes in dataset
+  name <- names(marker_genes)[i]
+  gene_ids <- marker_genes[[i]] %in% rownames(ser)
+
+  # For each list, create violin plots
+  pdf(file.path(dir, paste0('marker_genes/', name, '_vln_markers.pdf')), height = 4, width = 5)
+  for(mark in marker_genes[[i]][gene_ids]){
+    print(VlnPlot(ser, mark, group.by = 'Cluster', pt.size = 0) +
+      theme(legend.position = 'none'))
+  }
+  dev.off()
+}
+
 saveRDS(ser, 'data/2_ser.RDS')
