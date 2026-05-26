@@ -119,4 +119,39 @@ for(i in 1:length(marker_genes)){
   dev.off()
 }
 
+# Rename clusters after reviewing DE and marker genes
+cluster_names <- c(
+  '0'='Pyramidal.1',
+  '1'='Excitatory',
+  '2'='OD',
+  '3'='Astro',
+  '4'='Exc.Proj',
+  '5'='Cycling',
+  '6'='OPC',
+  '7'='GABAergic.Inter',
+  '8'='Inhibitory.Inter',
+  '9'='NPC',
+  '10'='Vasc.Endo',
+  '11'='Pericyte',
+  '12'='Pyramidal.2',
+  '13'='Granule',
+  '14'='Glial',
+  '15'='Macro'
+)
+ser <- RenameIdents(ser, cluster_names)
+ser$Cluster <- Idents(ser)
+
+pdf(file.path(dir, 'updated_clusters.pdf'))
+DimPlot(ser, group.by = 'Cluster', label = T, raster = F) +
+  theme(legend.position = 'none')
+dev.off()
+
+# Violin plots of QC metrics by cluster
+pdf(file.path(dir, 'updated_cluster_qc_vars.pdf'), height = 4, width = 5)
+for(qc in qc_vars){
+  print(VlnPlot(ser, qc, group.by = 'Cluster', pt.size = 0) +
+    theme(legend.position='none'))
+}
+dev.off()
+
 saveRDS(ser, 'data/2_ser.RDS')
