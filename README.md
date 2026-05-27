@@ -45,3 +45,12 @@ After I cluster the data, I perform differential expression to look for differen
 <img width="500" height="700" alt="Screenshot 2026-05-26 at 11 17 07 AM" src="https://github.com/user-attachments/assets/64fa485d-c480-40dc-8bb6-469939072756" />
 
 In order to move forward to more downstream analyses, it is best to label the clusters. With the cluster QC plots and DE heatmap, the next step is to create marker gene plots. All three of these tools will be used to label the clusters.
+
+After reviewing the differential expression heatmap and marker gene plots, clusters were labeled as follows:
+
+<img src="../temp/Screenshot 2026-05-27 at 12.25.37 PM.png" alt="Labeled Cluster Plot" width="400" height="400">
+
+
+Now let's investigate the proportions of each sample in each cluster. 
+
+## Proportions
