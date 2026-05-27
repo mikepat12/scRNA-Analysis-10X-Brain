@@ -8,6 +8,9 @@ dir <- '3 Proportions'
 # Read in seurat object
 ser <- readRDS('data/2_ser.RDS')
 
+################################################################################
+# Proportions
+################################################################################
 # Calculate clusters as proportion of each sample
 pdf(file.path(dir, 'cluster_proportions.pdf'), height = 5, width = 5)
 for(clust in Idents(ser$Cluster)){

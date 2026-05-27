@@ -9,6 +9,9 @@ options(future.globals.maxSize=Inf)
 if(!dir.exists('2 Clustering')) dir.create('2 Clustering')
 dir <- '2 Clustering'
 
+################################################################################
+# Combine Samples and Process
+################################################################################
 # Read in seurat list and merge
 sers <- readRDS('data/1_sers.RDS')
 ser <- merge(sers[[1]], sers[-1])
@@ -51,6 +54,9 @@ dev.off()
 
 # No batch effect correction needed
 
+################################################################################
+# Clustering
+################################################################################
 # Cluster data and plot clusters
 ser <- FindNeighbors(ser, dims=1:30, verbose=F) %>%
   FindClusters(resolution=0.3, verbose=F)
@@ -68,6 +74,9 @@ for(qc in qc_vars){
 }
 dev.off()
 
+################################################################################
+# Differential Expression
+################################################################################
 # Run differential expression on broad clustering
 marks <- FindAllMarkers(ser)
 saveRDS(marks, 'data/all_cluster_marks.RDS')
@@ -88,7 +97,9 @@ DoHeatmap(subser, top$gene) +
   theme(legend.position='none')
 dev.off()
 
-# Marker gene plots
+################################################################################
+# Marker Gene Plots
+################################################################################
 marker_genes <- list(
   'Immune'=c('Ptprc'),
   'T Cells'=c('Cd3e', 'Cd4','Cd8a'),
@@ -119,6 +130,9 @@ for(i in 1:length(marker_genes)){
   dev.off()
 }
 
+################################################################################
+# Rename Clusters
+################################################################################
 # Rename clusters after reviewing DE and marker genes
 cluster_names <- c(
   '0'='Pyramidal.1',
