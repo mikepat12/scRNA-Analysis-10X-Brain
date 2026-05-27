@@ -48,7 +48,7 @@ In order to move forward to more downstream analyses, it is best to label the cl
 
 After reviewing the differential expression heatmap and marker gene plots, clusters were labeled as follows:
 
-<img src="../temp/Screenshot 2026-05-27 at 12.25.37 PM.png" alt="Labeled Cluster Plot" width="400" height="400">
+<img src="code/images/Screenshot 2026-05-27 at 12.25.37 PM.png" alt="Labeled Cluster Plot" width="400" height="400">
 
 
 Now let's investigate the proportions of each sample in each cluster. 
