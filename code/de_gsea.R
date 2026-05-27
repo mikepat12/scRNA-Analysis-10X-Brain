@@ -27,51 +27,6 @@ get_min_max <- function(vals){
   return(c(bot_thresh, top_thresh))
 }
 
-EnrichmentPlot <- function(stats, pathway, gsea_param, ylims=NULL, title=''){
-  prep_df <- function(stats, pathway, gsea_param){
-    # Get GSEA stats by gene
-    rnk <- rank(-stats)
-    ord <- order(rnk)
-    stats_adj <- stats[ord]
-    stats_adj <- sign(stats_adj) * (abs(stats_adj)^gsea_param)
-    stats_adj <- stats_adj/max(abs(stats_adj))
-    pathway <- unname(as.vector(na.omit(match(pathway, names(stats_adj)))))
-    pathway <- sort(pathway)
-    gsea_res <- calcGseaStat(stats_adj, selectedStats=pathway,
-      returnAllExtremes=TRUE)
-
-    # Convert to data frame x, y coordinates for plotting
-    bottoms <- gsea_res$bottoms
-    tops <- gsea_res$tops
-    n <- length(stats_adj)
-    xs <- as.vector(rbind(pathway - 1, pathway))
-    ys <- as.vector(rbind(bottoms, tops))
-    data.frame(x=c(0, xs, n + 1), y=c(0, ys, 0))
-  }
-  
-  # Generate plot with real data
-  df <- prep_df(stats, pathway, gsea_param)
-  p <- ggplot(df, aes(x=x, y=y)) + 
-    geom_line(color='dark blue') + 
-    geom_hline(yintercept=max(df$y), colour='red', linetype='dashed') + 
-    geom_hline(yintercept=min(df$y), colour='red', linetype='dashed') + 
-    geom_hline(yintercept=0, colour="black") + 
-    theme_bw() +
-    geom_segment(mapping=aes(x=x, y=ylims[1], xend=x, yend=ylims[1]+0.05), size=0.2) +
-    theme(panel.grid=element_blank()) +
-    labs(x='Gene Rank', y='Enrichment Score', title=title)
-  
-  if(!is.null(ylims)) p <- p + ylim(ylims[1], ylims[2])
-
-
-  # Add lines for random permutations
-  for(i in 1:100){
-    names(stats) <- sample(names(stats))
-    df <- prep_df(stats, pathway, gsea_param)
-    p$layers <- c(geom_line(data=df, color='light grey', size=.1), p$layers)
-  }
-  p
-}
 ################################################################################
 # Differential Expression and GSEA
 ################################################################################
