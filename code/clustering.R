@@ -55,6 +55,12 @@ dev.off()
 # No batch effect correction needed
 
 ################################################################################
+# Demultiplex
+################################################################################
+ser <- NormalizeData(ser, assay = 'CMO', normalization.method = 'CLR')
+ser <- HTODemux(ser, assay = 'CMO', positive.quantile = 0.99)
+
+################################################################################
 # Clustering
 ################################################################################
 # Cluster data and plot clusters

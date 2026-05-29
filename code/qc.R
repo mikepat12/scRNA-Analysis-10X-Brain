@@ -13,11 +13,11 @@ read_data <- function(samp){
     samp, 'sample_feature_bc_matrix') %>%
     Seurat::Read10X()
   gx <- c[['Gene Expression']]
-  hto <- c[['Multiplexing Capture']]
+  cmo <- c[['Multiplexing Capture']]
   colnames(gx) <- paste0(colnames(gx), '_', samp)
-  colnames(hto) <- paste0(colnames(hto), '_', samp)
+  colnames(cmo) <- paste0(colnames(cmo), '_', samp)
   gx <- CreateSeuratObject(gx)
-  gx[['hto']] <- CreateAssayObject(hto)
+  gx[['CMO']] <- CreateAssayObject(cmo)
   return(gx)
 }
 
