@@ -1,5 +1,5 @@
 # Base image with R 4.5.0
-FROM rocker/r-ver:4.5.0
+FROM docker.io/rocker/r-ver:4.5.0
 
 # System dependencies
 RUN apt-get update && apt-get install -y \
