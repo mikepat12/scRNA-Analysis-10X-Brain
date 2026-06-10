@@ -48,6 +48,26 @@ In order to move forward to more downstream analyses, it is best to label the cl
 
 After reviewing the differential expression heatmap and marker gene plots, clusters were labeled as follows:
 
+| Original Cluster | New Cluster Name | Top Marker Genes        |
+|------------------|------------------|-------------------------|
+| Cluster 0        | Pyramidal.1      | Satb2, Dab1, Tenm3      |
+| Cluster 1        | Excitatory       | Nrg1, Nrn1, Cdh10       |
+| Cluster 2        | OD               | Tmsb4x, Eef1a1, Rps4x   |
+| Cluster 3        | Astro            | Tnc, Fabp7, Dbi, Mt3    |
+| Cluster 4        | Exc.Proj         | Zfp385b, Rgs6, Kctd16   |
+| Cluster 5        | Cycling          | G2M and S Score Plots   |
+| Cluster 6        | OPC              | Tafa1, Slit2, Hs6st3    |
+| Cluster 7        | GABAergic.Inter  | Nxph1, Erbb4, Nrxn3     |
+| Cluster 8        | Inhibitory.Inter | Adarb2, Dlx6os1, Pbx3   |
+| Cluster 9        | NPC              | Rmst, Dpf3, Mfap4       |
+| Cluster 10       | Vasc.Endo        | Pecam1, Vwf, Flt1, Bsg  |
+| Cluster 11       | Pericyte         | Rgs5, Pdgfrb, Notch3    |
+| Cluster 12       | Pyramidal.2      | Dab1, Galntl6, Cntnap2  |
+| Cluster 13       | Granule          | Snhg11, Reln            |
+| Cluster 14       | Glial            | Glis3, Lrp1b, Tnc, Dbi  |
+| Cluster 15       | Macro            | Itgam, Csf3r, Cd86, Hexb|
+
+
 <img src="code/images/Screenshot 2026-05-27 at 12.25.37 PM.png" alt="Labeled Cluster Plot" width="400" height="400">
 
 
